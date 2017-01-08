@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     final static String TAG = "MainActivity";
     final static int MY_PERMISSIONS_REQUEST = 1;
 
+    private PlaybackControlsFragment mControlsFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // パーミッションチェック
         if (checkPermission()) {
             musicListLoader();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart()");
+
+        mControlsFragment = (PlaybackControlsFragment) getFragmentManager().findFragmentById(R.id.fragment_playback_controls);
+        if (mControlsFragment == null) {
+            throw new IllegalStateException("Mising fragment with id 'controls'. Cannot continue.");
         }
     }
 
@@ -83,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        ListView listView = (ListView) parent;
+        Track track = (Track) listView.getItemAtPosition(position);
+        mControlsFragment.onMetadataChanged(track);
     }
 }
