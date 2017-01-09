@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:maxLines="1"
+        android:text="@string/default_text"
         android:textColor="@color/mainText" />
 
     <TextView
@@ -21,6 +22,16 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/music_name"
         android:maxLines="1"
+        android:text="@string/default_text"
         android:textColor="@color/subText" />
+
+    <ImageButton
+        android:id="@+id/play_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:src="@mipmap/play" />
 
 </RelativeLayout>
